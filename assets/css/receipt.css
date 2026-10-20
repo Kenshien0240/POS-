@@ -1,0 +1,57 @@
+/* Printable receipt styles */
+
+/* --------------------------------------------------------------------------
+   14. Receipt
+   -------------------------------------------------------------------------- */
+.receipt {
+    width: min(360px, 100%); margin: 0 auto; background: #fff; color: #111;
+    border-radius: var(--r); padding: 1.4rem 1.3rem; font-family: var(--font-mono); font-size: .8rem;
+    box-shadow: var(--shadow); border: 1px solid var(--line);
+}
+.receipt--plain { box-shadow: none; border: 0; }
+.receipt__store { text-align: center; margin-bottom: .9rem; }
+.receipt__store h3 { font-family: var(--font); font-size: 1.05rem; letter-spacing: -.01em; }
+.receipt__store p { color: #555; font-size: .74rem; margin-top: .2rem; }
+.receipt__meta { border-top: 1px dashed #bbb; border-bottom: 1px dashed #bbb; padding: .6rem 0; margin-bottom: .6rem; }
+.receipt__meta div { display: flex; justify-content: space-between; gap: .6rem; padding: .12rem 0; }
+.receipt table { width: 100%; border-collapse: collapse; }
+.receipt th { text-align: left; font-size: .7rem; text-transform: uppercase; color: #666; padding-bottom: .35rem; }
+.receipt td { padding: .22rem 0; vertical-align: top; }
+.receipt td.num, .receipt th.num { text-align: right; }
+.receipt__item-name { font-weight: 700; }
+.receipt__item-sub { color: #666; font-size: .72rem; }
+.receipt__totals { border-top: 1px dashed #bbb; margin-top: .5rem; padding-top: .5rem; }
+.receipt__totals div { display: flex; justify-content: space-between; padding: .14rem 0; }
+.receipt__totals div span:last-child { font-variant-numeric: tabular-nums; }
+.receipt__grand { font-size: 1rem; font-weight: 800; border-top: 1px solid #111; margin-top: .35rem; padding-top: .35rem; }
+.receipt__footer { text-align: center; margin-top: 1rem; padding-top: .8rem; border-top: 1px dashed #bbb; color: #555; }
+.receipt__title { text-align: center; letter-spacing: .2em; font-weight: 800; font-size: .78rem; margin: .1rem 0 .65rem; color: #111; }
+.receipt__void {
+    text-align: center; font-weight: 800; letter-spacing: .18em; color: #b91c1c;
+    border: 1px solid #b91c1c; border-radius: 4px; padding: .2rem; margin-bottom: .55rem; font-size: .74rem;
+}
+.receipt--voided { position: relative; overflow: hidden; }
+.receipt--voided::after {
+    content: "VOID"; position: absolute; inset: 0; display: grid; place-items: center;
+    font-family: var(--font); font-size: 4.5rem; font-weight: 800; letter-spacing: .1em;
+    color: rgba(209, 59, 59, .10); transform: rotate(-24deg); pointer-events: none;
+}
+.receipt__fineprint { font-size: .68rem; color: #777; margin-top: .22rem; }
+
+/* Thermal receipt print layout */
+@media print {
+    @page { size: 80mm auto; margin: 4mm; }
+    html, body { background: #fff !important; }
+    .receipt {
+        width: auto !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+    .receipt-page .card { max-width: none !important; }
+    .receipt, .receipt * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .receipt__items tr, .receipt__totals, .receipt__footer { break-inside: avoid; page-break-inside: avoid; }
+}

@@ -1,0 +1,21 @@
+# Group 6 Retail POS - Apache hardening
+Options -Indexes
+
+# Never serve local configuration, docs, SQL dumps, logs or dotfiles.
+<FilesMatch "^(?:\..*|local\.php|local\.example\.php|README\.md|error_log|.*\.(?:sql|log|bak)(?:\.gz)?)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Extra guard for version-control metadata and server-side folders.
+# PHP includes and SQL backups are never meant to be requested directly.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule "(^|/)\.(git|svn|env)(/|$)" - [F,L]
+    RewriteRule "^(?:config|includes|database|logs|tests)(?:/|$)" - [F,L]
+</IfModule>

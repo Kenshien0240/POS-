@@ -1,0 +1,25 @@
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+error_log
+/logs/
+
+# Local environment / secrets (never commit real credentials)
+/config/local.php
+/config/local.php.*
+.env
+.env.*
+!.env.example
+
+# Local database dumps
+*.sql.gz
+*.dump

@@ -1,0 +1,58 @@
+/* POS screen styles */
+
+/* --------------------------------------------------------------------------
+   13. POS screen
+   -------------------------------------------------------------------------- */
+.pos { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 1.25rem; align-items: start; }
+@media (max-width: 1080px) { .pos { grid-template-columns: 1fr; } }
+
+.pos-panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow-xs); display: flex; flex-direction: column; }
+.pos-search { padding: 1rem; border-bottom: 1px solid var(--line); display: flex; gap: .6rem; flex-wrap: wrap; }
+.pos-search .search-box { min-width: 240px; }
+.pos-filters { padding: 0 1rem 1rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+.chip {
+    border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-soft);
+    padding: .34rem .8rem; border-radius: var(--r-full); font-size: .8rem; font-weight: 600; cursor: pointer;
+    transition: all var(--dur) var(--ease);
+}
+.chip:hover { border-color: var(--accent-400); color: var(--accent-700); }
+.chip.is-active { background: var(--accent-600); border-color: var(--accent-600); color: #fff; }
+
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .85rem; padding: 1rem; overflow-y: auto; max-height: calc(100vh - 300px); }
+.product-card {
+    text-align: left; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface);
+    padding: .85rem; display: flex; flex-direction: column; gap: .55rem; cursor: pointer;
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.product-card:hover { transform: translateY(-2px); border-color: var(--accent-400); box-shadow: var(--shadow-sm); }
+.product-card:disabled, .product-card.is-out { opacity: .55; cursor: not-allowed; transform: none; }
+.product-card__name { font-weight: 620; font-size: .9rem; line-height: 1.3; min-height: 2.3em; }
+.product-card__code { font-family: var(--font-mono); font-size: .72rem; color: var(--muted); }
+.product-card__foot { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: auto; }
+.product-card__price { font-weight: 700; font-size: .98rem; color: var(--ink); }
+.product-card__stock { font-size: .74rem; color: var(--muted); }
+
+.cart-panel { position: sticky; top: calc(var(--topbar-h) + 1rem); }
+.cart-list { overflow-y: auto; max-height: calc(100vh - 430px); min-height: 140px; }
+.cart-item { display: grid; grid-template-columns: 1fr auto; gap: .6rem; padding: .8rem 1rem; border-bottom: 1px solid var(--line); }
+.cart-item__name { font-weight: 600; font-size: .88rem; }
+.cart-item__meta { color: var(--muted); font-size: .76rem; font-family: var(--font-mono); }
+.cart-item__right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: .4rem; }
+.cart-item__line { font-weight: 700; font-variant-numeric: tabular-nums; }
+.qty { display: inline-flex; align-items: center; border: 1px solid var(--line-strong); border-radius: var(--r-xs); overflow: hidden; }
+.qty button { border: 0; background: var(--surface-2); width: 30px; height: 30px; cursor: pointer; color: var(--ink-soft); display: grid; place-items: center; font-size: 1.05rem; line-height: 1; }
+.qty button:hover { background: var(--accent-50); color: var(--accent-700); }
+.qty input { width: 46px; height: 30px; border: 0; border-left: 1px solid var(--line-strong); border-right: 1px solid var(--line-strong); text-align: center; font: inherit; font-size: .85rem; font-weight: 600; background: var(--surface); color: var(--ink); }
+.cart-item__remove { background: none; border: 0; color: var(--muted); cursor: pointer; padding: .2rem; border-radius: var(--r-xs); }
+.cart-item__remove:hover { color: var(--danger); background: var(--danger-bg); }
+
+.pos-actions { padding: 0 1rem 1rem; display: grid; gap: .55rem; }
+
+.pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+.pay-method {
+    border: 1.5px solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface);
+    padding: .7rem .4rem; cursor: pointer; text-align: center; font-size: .8rem; font-weight: 600;
+    color: var(--ink-soft); display: grid; gap: .3rem; justify-items: center; transition: all var(--dur) var(--ease);
+}
+.pay-method:hover { border-color: var(--accent-400); }
+.pay-method.is-active { border-color: var(--accent-500); background: var(--accent-50); color: var(--accent-700); }
